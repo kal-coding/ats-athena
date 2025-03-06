@@ -8,6 +8,7 @@ skinparam linetype ortho
 entity "Users" as _users {
   *user_id : uuid <<PK>>
   *name : varchar
+  *email : varchar
   --
 }
 
@@ -53,6 +54,12 @@ entity "Organizations" as _organizations {
   *name : varchar
 }
 
+entity "Workspaces" as workspaces {
+  *organization_id : uuid <<PK>>
+  --
+  *name : varchar
+}
+
 entity "Entities" as _entities {
   *entity_id : uuid <<PK>>
   last_sync_version: number
@@ -80,8 +87,6 @@ entity "Recruitment Pipelines" as _rec_pipelines {
   *description: text
     --
   *entity_id: uuid <<FK>>
-  *team_id: uuid <<FK>>
-
 }
 
 entity "Recruitment Pipeline Stages" as _rec_pipeline_stages {
@@ -128,7 +133,7 @@ entity "Candidate Profiles" as _candidate_profiles {
     *rec_pipeline_id: uuid <<FK>>
 }
 
-entity "Scorecard Form" as _scorecard_structure {
+entity "Scorecards" as _scorecards {
   *scorecard_form_id: uuid
   --
   *rec_pipeline_id: uuid
@@ -173,6 +178,21 @@ _candidate_profiles ||..|{ _job_applications
 
 ' User Permissions
 _users ||..|{ _user_permissions
+_permissions ||..|{ _user_permissions
+
+_user_types ||..|{_user_type_permissions
+_permissions ||..|{ _user_type_permissions
+
+_users ||..|{ workspaces
+_organizations ||..|{ workspaces
+
+' Scorecards 
+
+_scorecards ||..|{ _scorecard_items
+_scorecard_item_types ||..|{ _scorecard_items
+_users ||..|{ _scorecard_items
+
+_scorecards ||..|{ _rec_pipeline_stages
 
 
 @enduml
