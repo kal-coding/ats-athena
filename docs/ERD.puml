@@ -1,0 +1,156 @@
+@startuml
+
+' hide the spot
+' hide circle
+' avoid problems with angled crows feet
+skinparam linetype ortho
+
+entity "Users" as _users {
+  *user_id : uuid <<PK>>
+  *name : varchar
+  --
+}
+
+entity "Users Org History" as _user_org_history {
+  *user_id : uuid <<PK>>
+  *name : varchar
+  *status : [ACTIVE,]
+  --
+  *organization_id : uuid <<FK>>
+  *entity_id: uuid <<FK>>
+  *department_id: uuid <<FK>>
+  *team_id: uuid <<FK>>
+}
+
+entity "User Types" as _user_types {
+  *user_type_id : uuid <<PK>>
+  --
+  *name : varchar
+}
+
+entity "User Type Permissions" as _user_type_permissions {
+  *def_user_type_ : uuid <<PK>>
+  --
+  *user_type_id : varchar <<FK>>
+}
+
+entity "User Permissions" as _user_permissions {
+  *def_user_ : uuid <<PK>>
+  --
+  *name : varchar
+}
+
+entity "Permissions" as _permissions {
+  *permission_id : uuid <<PK>>
+  *name:
+  --
+  *name : varchar
+}
+
+entity "Organizations" as _organizations {
+  *organization_id : uuid <<PK>>
+  --
+  *name : varchar
+}
+
+entity "Entities" as _entities {
+  *entity_id : uuid <<PK>>
+  last_sync_version: number
+  --
+  *organization_id : uuid <<FK>>
+  other_details : text
+}
+
+entity "Departments" as _departments {
+  *department_id: uuid <<PK>>
+  --
+  *entity_id : uuid <<FK>>
+}
+
+entity "Teams" as _teams {
+    *team_id: uuid <<PK>>
+  --
+  *department_id: uuid <<FK>>
+
+}
+
+entity "Recruitment Pipelines" as _rec_pipelines {
+  *rec_pipeline_id: uuid <<PK>>
+  *name: varchar
+  *description: text
+    --
+  *entity_id: uuid <<FK>>
+  *team_id: uuid <<FK>>
+
+}
+
+entity "Recruitment Pipeline Stages" as _rec_pipeline_stages {
+  *rec_pipeline_stage_id: uuid
+  --
+  *rec_pipeline_id: uuid <<FK>>
+}
+
+entity "Recruitment Stage Types" as _stage_types {
+  *stage_type_id : uuid <<PK>>
+  *name: varchar
+  *has_users: bool
+  *invited_users: array
+  --
+  *name : varchar
+}
+
+entity "Vacant Jobs" as _vacant_jobs {
+  *vacant_job: uuid
+  --
+  *rec_pipeline_id: uuid
+  *team_id: uuid <<FK>>
+}
+
+entity "Job Applications" as _job_applications{
+  *job_application_id: uuid
+  *job_application_status: 
+--
+  *candidate_id: uuid <<FK>>
+
+}
+
+entity "Job Application History" as _job_application_history{
+  *job_application_history_id: uuid
+--
+  *action_by: user_id
+  *rec_pipeline_stage_id: uuid <<FK>>
+  *job_application_id: uuid <<FK>>
+}
+
+entity "Candidate Profiles" as _candidate_profiles {
+    *candidate_id: uuid
+  --
+    *rec_pipeline_id: uuid <<FK>>
+}
+
+
+_organizations ||..|{ _entities
+
+_entities ||..|{ _rec_pipelines
+_entities ||..|{ _departments
+
+_departments ||..|{ _teams
+
+_teams ||..|{ _vacant_jobs
+
+_rec_pipelines ||..|{ _vacant_jobs
+_rec_pipelines ||..|{ _rec_pipeline_stages
+
+_vacant_jobs ||.|{ _job_applications
+
+_job_applications ||.|{ _job_application_history
+_rec_pipeline_stages ||.|{ _job_application_history
+
+
+_candidate_profiles ||..|{ _job_applications
+
+' User Permissions
+_users ||..|{ _user_permissions
+
+
+@enduml
