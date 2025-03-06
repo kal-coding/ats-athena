@@ -10,8 +10,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "build": "tsc",
     "start": "node dist/index.js",
-    "start-dev": "npx ts-node src/index.ts",
-    "update-types": "npx supabase gen types --lang=typescript --project-id \"$PROJECT_REF\" > database.types.ts"
+    "start-dev": "npx ts-node backend/index.ts",
+    "update-types": "npx supabase gen types --lang=typescript --project-id \"$SUPABASE_PROJECT_ID\" > database.types.ts"
   },
   "keywords": [],
   "author": "",
@@ -24,6 +24,8 @@
     "typescript": "^5.8.2"
   },
   "dependencies": {
+    "@supabase/postgrest-js": "^1.19.2",
+    "@supabase/supabase-js": "^2.49.1",
     "dotenv": "^16.4.7",
     "express": "^4.21.2"
   }
