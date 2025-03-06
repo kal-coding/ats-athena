@@ -86,7 +86,7 @@ entity "Recruitment Pipelines" as _rec_pipelines {
   *name: varchar
   *description: text
     --
-  *entity_id: uuid <<FK>>
+  *organization_id: uuid <<FK>>
 }
 
 entity "Recruitment Pipeline Stages" as _rec_pipeline_stages {
@@ -158,7 +158,7 @@ entity "Scorecard Item Types" as _scorecard_item_types {
 
 _organizations ||..|{ _entities
 
-_entities ||..|{ _rec_pipelines
+_organizations ||..|{ _rec_pipelines
 _entities ||..|{ _departments
 
 _departments ||..|{ _teams
