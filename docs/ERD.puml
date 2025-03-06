@@ -128,7 +128,7 @@ entity "Candidate Profiles" as _candidate_profiles {
     *rec_pipeline_id: uuid <<FK>>
 }
 
-entity "scorecard Form" as _scorecard_structure {
+entity "Scorecard Form" as _scorecard_structure {
   *scorecard_form_id: uuid
   --
   *rec_pipeline_id: uuid
@@ -136,14 +136,14 @@ entity "scorecard Form" as _scorecard_structure {
   *rec_pipeline_stage_id: uuid <<FK>>
 }
 
-entity "scorecard Items" as _scorecard_items {
+entity "Scorecard Items" as _scorecard_items {
   *scorecard_item_id: uuid
   --
   *rec_pipeline_id: uuid
   *team_id: uuid <<FK>>
 }
 
-entity "scorecard Item Types" as _scorecard_item_types {
+entity "Scorecard Item Types" as _scorecard_item_types {
   *scorecard_item_type_id: uuid
   --
   *rec_pipeline_id: uuid
