@@ -3,7 +3,7 @@ FROM node:20-alpine
 
 # The /app directory should act as the main application directory
 RUN mkdir -p /usr/src/app
-WORKDIR usr/src/app
+WORKDIR /usr/src/app
 
 # Copy the app package and package-lock.json file
 COPY package*.json ./
