@@ -1,0 +1,11 @@
+services:
+  backend:
+    env_file: ".env"
+    build:
+      context: .
+      dockerfile: backendDockerFile
+    container_name: ats-athena-backend
+    ports:
+      - "3000:3000"
+volumes:
+  data_sql:
