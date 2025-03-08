@@ -1,0 +1,49 @@
+/src
+  ├── /domain
+  │   ├── /user
+  │   │   ├── /entities
+  │   │   │   └── User.ts
+  │   │   ├── /valueObjects
+  │   │   │   └── Permission.ts
+  │   │   ├── /repositories
+  │   │   │   └── UserRepository.ts
+  │   │   ├── /services
+  │   │   │   └── UserService.ts
+  │   │   └── /events
+  │   │       └── UserCreatedEvent.ts
+  │   ├── /jobPosting
+  │   │   ├── /entities
+  │   │   │   └── JobPosting.ts
+  │   │   ├── /repositories
+  │   │   │   └── JobPostingRepository.ts
+  │   │   └── /services
+  │   │       └── JobPostingService.ts
+  │   └── /application
+  │       └── /services
+  │           └── ApplicationService.ts
+  ├── /infrastructure
+  │   ├── /database
+  │   │   ├── /models
+  │   │   │   └── UserModel.ts
+  │   │   └── /orm
+  │   │       └── SequelizeDatabase.ts
+  │   └── /web
+  │       └── /controllers
+  │           ├── AuthController.ts
+  │           └── JobPostingController.ts
+  │       └── /middlewares
+  │           └── authMiddleware.ts
+  ├── /application
+  │   └── /dtos
+  │       ├── CreateUserDTO.ts
+  │       └── CreateJobPostingDTO.ts
+  │   └── /viewModels
+  │       ├── UserViewModel.ts
+  │       └── JobPostingViewModel.ts
+  ├── /shared
+  │   └── /errors
+  │       └── ValidationError.ts
+  ├── /config
+  │   └── config.ts
+  ├── /index.ts
+  └── /server.ts

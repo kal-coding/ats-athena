@@ -14,7 +14,7 @@ const supabase = createClient<Database>(supabaseUrl, supabaseKey)
 console.log('alive')
 
 app.get("/healthcheck", (req: Request, res: Response) => {
-  res.send("Working as god intended");
+  res.send("Working as spaghetti intended");
 });
 
 app.get('/organizations', async (req, res) => {
